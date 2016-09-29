@@ -1,0 +1,5 @@
+C:/Users/adunca202/Desktop/GitHub/GP2BaseCode1617/CMakeFiles/GP2BaseCode1617.dir
+C:/Users/adunca202/Desktop/GitHub/GP2BaseCode1617/GameApplication/Utils/CMakeFiles/Utils.dir
+C:/Users/adunca202/Desktop/GitHub/GP2BaseCode1617/GameApplication/Utils/CMakeFiles/ALL_BUILD.dir
+C:/Users/adunca202/Desktop/GitHub/GP2BaseCode1617/CMakeFiles/ZERO_CHECK.dir
+C:/Users/adunca202/Desktop/GitHub/GP2BaseCode1617/GameApplication/CMakeFiles/GameApplication.dir
