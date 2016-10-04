@@ -30,6 +30,14 @@ public:
 	//Basically runs our game
 	void run();
 
+	void OnBeginRender();
+
+	virtual void render();
+
+	void OnEndRender();
+	
+	virtual void update();
+
 	void createWindow(const string& windowTitle,const unsigned int width, const unsigned int height, const unsigned int windowFlags=0);
 protected:
 	//SDL Windows

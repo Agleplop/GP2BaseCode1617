@@ -9,7 +9,7 @@ GameApplication::GameApplication()
 	CREATELOG("log.txt");
 	m_bIsActive=false;
 	m_bIsRunning=false;
-  m_WindowTitle="Game";
+	m_WindowTitle="Game";
 }
 
 GameApplication::~GameApplication()
@@ -115,9 +115,11 @@ void GameApplication::run()
 	while (m_bIsRunning)
 	{
 		//While we still have events in the queue
-		while (SDL_PollEvent(&event)) {
+		while (SDL_PollEvent(&event))
+		{
 			//Get event type
-			if (event.type == SDL_QUIT) {
+			if (event.type == SDL_QUIT)
+			{
 
 				OnQuit();
 			}
@@ -134,6 +136,12 @@ void GameApplication::run()
 						LOG(ERROR, "Can't Maximize %s", SDL_GetError());
 					}
 				}
+
+				GameApplication::update();
+				GameApplication::OnBeginRender();
+				GameApplication::render();
+				GameApplication::OnEndRender();
+
 			}
 			if (event.type == SDL_WINDOWEVENT)
 			{
@@ -166,3 +174,24 @@ void GameApplication::run()
 		}
 	}
 }
+
+void GameApplication::OnBeginRender()
+{
+
+}
+
+void GameApplication::render()
+{
+
+}
+
+void GameApplication::OnEndRender()
+{
+
+}
+
+void GameApplication::update()
+{
+
+}
+
