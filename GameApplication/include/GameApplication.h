@@ -39,6 +39,10 @@ public:
 	virtual void update();
 
 	void createWindow(const string& windowTitle,const unsigned int width, const unsigned int height, const unsigned int windowFlags=0);
+
+	void initGraphics();
+
+	void setViewport(int width, int height);
 protected:
 	//SDL Windows
 	SDL_Window * m_pWindow;
