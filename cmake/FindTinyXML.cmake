@@ -9,6 +9,8 @@
 # modified by Brian McDonald for Mac OS on 2/6/16
 # modified by Brian McDonald for TinyXML2 on 18/07/16
 
+MESSAGE("Tiny XML ")
+MESSAGE("$ENV{TINYXML_PATH}")
 IF( TINYXML_INCLUDE_DIR )
     # Already in cache, be silent
     SET( TinyXML_FIND_QUIETLY TRUE )
