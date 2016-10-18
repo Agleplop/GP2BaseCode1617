@@ -15,6 +15,8 @@
 #include <chrono>
 #include <ctime>
 #include <cstdarg>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
 
 //Name space std, so we don't need to do std::vector
 using namespace std;

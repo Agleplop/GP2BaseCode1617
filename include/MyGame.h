@@ -20,6 +20,10 @@ public:
 	mat4 m_ProjMatrix;
 	mat4 m_ModelMatrix;
 
+	GLuint m_Texture;
+
+	GLuint m_Sampler;
+
 private:
 	GLuint m_VBO;
 	GLuint m_VAO;

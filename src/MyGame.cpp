@@ -2,10 +2,12 @@
 struct Vertex
 {
 	float x, y, z;
+	float tu, tv;
 };
 
 const std::string ASSET_PATH = "assets";
 const std::string SHADER_PATH = "/shaders";
+const std::string TEXTURE_PATH = "/textures";
 
 MyGame::MyGame()
 {
@@ -24,14 +26,17 @@ void MyGame::initScene()
 
 	Vertex verts[] =
 	{
-		{-0.5f, -0.5f, 0.0f},
-		{0.5f, -0.5f, 0.0f},
-		{0.0f, 0.5f, 0.0f}
+		{1,3,0,0,1},
+		{1,1,0,0,0},
+		{3,3,0,1,1},
+		{3,3,0,1,1},
+		{1,1,0,0,0},
+		{3,1,0,1,0},
 	};
 
 	glGenBuffers(1,&m_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER,m_VBO);
-	glBufferData(GL_ARRAY_BUFFER,3 * sizeof(Vertex),verts,GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER,6 * sizeof(Vertex),verts,GL_STATIC_DRAW);
 
 	glGenVertexArrays(1,&m_VAO);
 	glBindVertexArray(m_VAO);
@@ -40,12 +45,15 @@ void MyGame::initScene()
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,sizeof(Vertex),NULL);
 
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),(void**)(3*sizeof(float)));
+
 	GLuint vertexShaderProgram = 0;
-	std::string vspath = ASSET_PATH+SHADER_PATH+"\simpleVS.glsl";
+	std::string vspath = ASSET_PATH+SHADER_PATH+"/simpleVS.glsl";
 	vertexShaderProgram = loadShaderFromFile(vspath, VERTEX_SHADER);
 
 	GLuint fragmentShaderProgram = 0;
-	std::string fsPath = ASSET_PATH + SHADER_PATH + "\simpleFS.glsl";
+	std::string fsPath = ASSET_PATH + SHADER_PATH + "/simpleFS.glsl";
 	fragmentShaderProgram = loadShaderFromFile(fsPath, FRAGMENT_SHADER);
 
 	m_ShaderProgram = glCreateProgram();
@@ -57,6 +65,20 @@ void MyGame::initScene()
 
 	glDeleteShader(vertexShaderProgram);
 	glDeleteShader(fragmentShaderProgram);
+
+	string texturePath = ASSET_PATH + TEXTURE_PATH + "/texture.png";
+
+	m_Texture = loadTextureFromFile(texturePath);
+
+	glBindTexture(GL_TEXTURE_2D, m_Texture);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	glGenSamplers(1,&m_Sampler);
+	glSamplerParameteri(m_Sampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glSamplerParameteri(m_Sampler, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glSamplerParameteri(m_Sampler, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glSamplerParameteri(m_Sampler, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
 }
 
 void MyGame::destroyScene()
@@ -66,6 +88,8 @@ void MyGame::destroyScene()
 	glDeleteProgram(m_ShaderProgram);
 	glDeleteVertexArrays(1, &m_VAO);
 	glDeleteBuffers(1, &m_VBO);
+	glDeleteTextures(1, &m_Texture);
+	glDeleteSamplers(1, &m_Sampler);
 }
 
 void MyGame::render()
@@ -82,13 +106,22 @@ void MyGame::render()
 		glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, glm::value_ptr(MVP));
 	}
 
+	glBindSampler(0, m_Sampler);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, m_Texture);
+	GLint textureLocation = glGetUniformLocation(m_ShaderProgram, "diffuseSampler");
+	if (textureLocation != -1)
+	{
+		glUniform1i(textureLocation, 0);
+	}
+
 	GLint ColourLocation = glGetUniformLocation(m_ShaderProgram, "Colour");
 	if (ColourLocation != -1)
 	{
 		vec4 Colours = vec4 (1.0f, 0.0f, 0.0f, 0.0f);
 		glUniform4fv(ColourLocation, 1, glm::value_ptr(Colours));
 	}
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 void MyGame::update()
