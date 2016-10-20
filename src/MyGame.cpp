@@ -26,18 +26,18 @@ void MyGame::initScene()
 
 	Vertex verts[] =
 	{
-		{1,3,0,0,1},
-		{1,1,0,0,0},
-		{3,3,0,1,1},
-		{3,3,0,1,1},
-		{1,1,0,0,0},
-		{3,1,0,1,0},
+		{1,3,0,1,0},
+		{1,1,0,1,1},
+		{3,3,0,0,0},
+		{3,3,0,0,0},
+		{1,1,0,1,1},
+		{3,1,0,0,1},
 	};
 
 	glGenBuffers(1,&m_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER,m_VBO);
 	glBufferData(GL_ARRAY_BUFFER,6 * sizeof(Vertex),verts,GL_STATIC_DRAW);
-
+	
 	glGenVertexArrays(1,&m_VAO);
 	glBindVertexArray(m_VAO);
 	glBindBuffer(GL_ARRAY_BUFFER,m_VBO);
@@ -53,7 +53,7 @@ void MyGame::initScene()
 	vertexShaderProgram = loadShaderFromFile(vspath, VERTEX_SHADER);
 
 	GLuint fragmentShaderProgram = 0;
-	std::string fsPath = ASSET_PATH + SHADER_PATH + "/simpleFS.glsl";
+	std::string fsPath = ASSET_PATH + SHADER_PATH + "/textureFS.glsl";
 	fragmentShaderProgram = loadShaderFromFile(fsPath, FRAGMENT_SHADER);
 
 	m_ShaderProgram = glCreateProgram();

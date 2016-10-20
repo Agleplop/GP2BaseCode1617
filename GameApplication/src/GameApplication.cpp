@@ -62,13 +62,12 @@ bool GameApplication::init(int args,char * arg[])
 
 	//Controls the game loop
 	m_bIsRunning = true;
-
-  LOG(INFO,"%s","Initialising SDL");
+	LOG(INFO,"%s","Initialising SDL");
 	// init everyting - SDL, if it is nonzero we have a problem
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		//std::cout << "ERROR SDL_Init " << SDL_GetError() << std::endl;
-    LOG(ERROR,"SDL can't be initialised %s",SDL_GetError());
+		LOG(ERROR,"SDL can't be initialised %s",SDL_GetError());
 		return false;
 	}
 
