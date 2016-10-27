@@ -28,6 +28,9 @@ private:
 	GLuint m_Texture;
 	GLuint m_ClampSampler;
 
-	GameObject * m_TestObject;
+	GameObject *m_TestObject;
+	GameObject *m_TestObject1;
+
+	
 };
 #endif

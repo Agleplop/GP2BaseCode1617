@@ -19,7 +19,11 @@ public:
 
 	void LoadTexture(const string& texture);
 	void LoadShaders(const string& vsFileName, const string& fsFileName);
-	void CopyVertexData(Vertex *pVerts, int numberOfVertices);
+	void CopyVertexData(Vertex *pVerts, int numbersOfVertices);
+
+	void TransformObject(float xPosChange, float yPosChange);
+	void RotateObject(float xRotation, float yRotation, float zRotation);
+	void ScaleObject(float xScale, float yScale, float zScale);
 private:
 	GLuint m_VBO;
 	GLuint m_VAO;

@@ -109,6 +109,8 @@ void GameObject::LoadShaders(const string & vsFileName, const string & fsFileNam
 
 void GameObject::CopyVertexData(Vertex *pVerts, int numberOfVertices)
 {
+	m_NumberOfVertices = numberOfVertices;
+
 	glGenBuffers(1, &m_VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 	glBufferData(GL_ARRAY_BUFFER, numberOfVertices * sizeof(Vertex), pVerts, GL_STATIC_DRAW);
@@ -125,4 +127,24 @@ void GameObject::CopyVertexData(Vertex *pVerts, int numberOfVertices)
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
 		(void**)offsetof(Vertex, texCoords));
+}
+
+void GameObject::TransformObject(float xPosChange, float yPosChange)
+{
+	m_Position.x += xPosChange;
+	m_Position.y += yPosChange;
+}
+
+void GameObject::RotateObject(float xRotation, float yRotation, float zRotation)
+{
+	m_Rotation.x += xRotation;
+	m_Rotation.y += yRotation;
+	m_Rotation.z += zRotation;
+}
+
+void GameObject::ScaleObject(float xScale, float yScale, float zScale)
+{
+	m_Scale.x += xScale;
+	m_Scale.y += yScale;
+	m_Scale.z += zScale;
 }
