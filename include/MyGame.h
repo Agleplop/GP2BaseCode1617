@@ -29,5 +29,7 @@ private:
 	GLuint m_ClampSampler;
 
 	GameObject * m_TestObject;
+
+	//std::vector<unsigned int> m_Indices;
 };
 #endif
