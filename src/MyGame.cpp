@@ -41,7 +41,7 @@ void MyGame::initScene()
 
 	string modelPath = ASSET_PATH + MODEL_PATH + "/utah-teapot.fbx";
 
-	//m_TestObject->copyVertexData(verts, 4, indices, 6);	
+	m_TestObject->copyVertexData(verts, 4, indices, 6);	
 
 	m_TeaPot = loadModelFromFile(modelPath);
 	m_TeaPot->loadShaders(vsPath, fsPath);
@@ -56,14 +56,16 @@ void MyGame::destroyScene()
 		delete m_TeaPot;
 		m_TeaPot = nullptr;
 	}
-	/*
-	if (m_TestObject)
-	{
-		m_TestObject->onDestroy();
-		delete m_TestObject;
-		m_TestObject = nullptr;
-	}
-	*/
+
+	//
+	//if (m_TestObject)
+	//{
+	//	m_TestObject->onDestroy();
+	//	delete m_TestObject;
+	//	m_TestObject = nullptr;
+	//}
+	//
+	
 }
 
 void MyGame::update()

@@ -30,6 +30,7 @@ GameObject * loadModelFromFile(const string & filename)
 		for (int v = 0; v < mesh->mNumVertices; v++)
 		{
 			aiVector3D position = mesh->mVertices[v];
+			aiVector3D normals = mesh->mNormals[v];
 			aiColor4D colour = aiColor4D(1.0f, 1.0f, 1.0f, 1.0f);
 			if (mesh->mColors[0] != nullptr) {
 				colour = mesh->mColors[v][0];
@@ -38,7 +39,7 @@ GameObject * loadModelFromFile(const string & filename)
 			Vertex ourV;
 			ourV.position = vec3(position.x, position.y, position.z);
 			ourV.colour = vec4(colour.r, colour.g, colour.b, colour.a);
-
+			ourV.normals = vec3(normals.x, normals.y, normals.z);
 
 			verts.push_back(ourV);
 		}
