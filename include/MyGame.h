@@ -29,7 +29,7 @@ private:
 	GLuint m_ClampSampler;
 
 	GameObject * m_TestObject;
+	GameObject * m_TeaPot;
 
-	//std::vector<unsigned int> m_Indices;
 };
 #endif

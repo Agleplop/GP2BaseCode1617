@@ -37,4 +37,9 @@ using namespace glm;
 
 #include "../Utils/include/Utils.h"
 
+#include <assimp\cimport.h>
+#include <assimp\scene.h>
+#include <assimp\postprocess.h>
+#include <assimp\color4.h>
+
 #endif
