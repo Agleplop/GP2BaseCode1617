@@ -31,5 +31,12 @@ private:
 	GameObject * m_TestObject;
 	GameObject * m_TeaPot;
 
+	vec3 m_CameraPosition;
+	vec3 m_LightDirection;
+
+	vec4 m_AmbientMatColour;
+	vec4 m_DiffuseMatColour;
+	vec4 m_SpecularMatColour;
+	float m_SpecularPower;
 };
 #endif

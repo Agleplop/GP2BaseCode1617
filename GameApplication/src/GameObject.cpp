@@ -36,6 +36,54 @@ void GameObject::onRender(mat4 & view, mat4 & projection)
 		mat4 MVP = projection*view*m_ModelMatrix;
 		glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, glm::value_ptr(MVP));
 	}
+
+	GLint modelLocation = glGetUniformLocation(m_ShaderProgram, "Model");
+	if (modelLocation != -1)
+	{
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(m_ModelMatrix));
+	}
+
+	//sending vec3s
+	GLint cameraPosLocation = glGetUniformLocation(m_ShaderProgram, "cameraPos");
+	if (cameraPosLocation != -1)
+	{
+		glUniform3fv(cameraPosLocation, 1, value_ptr(m_CameraPosition));
+	}
+
+	//Light Direction
+
+	GLint lightDirecLocation = glGetUniformLocation(m_ShaderProgram, "lightDirection");
+	if (lightDirecLocation != -1)
+	{
+		glUniform3fv(lightDirecLocation, 1, value_ptr(m_lightDirection));
+	}
+
+	//Material colours
+
+	GLint ambientMatLocation = glGetUniformLocation(m_ShaderProgram, "ambientMaterialColour");
+	if (ambientMatLocation != -1)
+	{
+		glUniform4fv(ambientMatLocation, 1, value_ptr(m_AmbientMatColour));
+	}
+
+	GLint diffuseMatLocation = glGetUniformLocation(m_ShaderProgram, "diffuseMaterialColour");
+	if (diffuseMatLocation != -1)
+	{
+		glUniform4fv(diffuseMatLocation, 1, value_ptr(m_DiffuseMatColour));
+	}
+
+	GLint specularMatLocation = glGetUniformLocation(m_ShaderProgram, "specularMaterialColour");
+	if (specularMatLocation != -1)
+	{
+		glUniform4fv(specularMatLocation, 1, value_ptr(m_SpecularMatColour));
+	}
+
+	GLint specPowerLocation = glGetUniformLocation(m_ShaderProgram, "specularPower");
+	if (specPowerLocation != -1)
+	{
+		glUniform1f(specPowerLocation, m_SpecularPower);
+	}
+
 	glBindSampler(0, m_ClampSampler);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_Texture);
